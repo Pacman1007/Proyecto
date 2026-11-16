@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BellaVita, salón de belleza en Cochabamba. Cuidado facial, peinados, manicura, depilación y maquillaje profesional.">
+  <title>ARIANA HTML | Salón de Belleza</title>
+  <style>
+    :root {
+      --pink: #f00c4c;
+      --pink-dark: #8f0b33;
+      --pink-light: #e3f4f7;
+      --blush: #fbf5f3;
+      --ink: #192633;
+      --muted: #4a515a;
+      --dark: #171b1a;
+      --white: #fff;
+      --max: 1280px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; color: var(--ink); background: var(--blush); font-family: "Segoe UI", Arial, sans-serif; line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(100% - 40px, var(--max)); margin-inline: auto; }
+    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,250,248,.96); backdrop-filter: blur(12px); border-bottom: 1px solid #eadbdd; }
+    .nav { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .brand-mark { width: 48px; height: 58px; color: var(--pink); }
+    .brand-name { font-family: Georgia, "Times New Roman", serif; font-size: clamp(25px, 2.5vw, 38px); font-style: italic; line-height: 1; letter-spacing: -1.5px; }
+    .brand-sub { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-align: center; margin-top: 5px; }
+    .nav-links { display: flex; align-items: center; gap: clamp(15px, 3vw, 38px); }
+    .nav-links a { position: relative; padding: 12px 0; font-size: 14px; font-weight: 650; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 4px; width: 0; height: 2px; background: var(--pink); transition: width .2s; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .btn { border: 0; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 24px; border-radius: 999px; font-weight: 650; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #a948642b; }
+    .btn-primary { color: white; background: var(--pink); }
+    .btn-primary:hover { background: var(--pink-dark); }
+    .btn-outline { color: var(--pink-dark); background: transparent; border: 1.5px solid var(--pink); }
+    .menu-toggle { display: none; background: none; border: 0; color: var(--ink); font-size: 28px; cursor: pointer; }
+    .hero { min-height: 420px; position: relative; isolation: isolate; display: flex; align-items: center; overflow: hidden; background: #d8c3b7; }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("img/img/WhatsApp Image 2026-10-20 at 2.34.29 PM (2).jpeg") center 43% / cover no-repeat; transform: scale(1.02); }
+    .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(250,241,235,.97) 0%, rgba(250,241,235,.91) 34%, rgba(250,241,235,.12) 60%, rgba(40,25,22,.12) 100%); }
+    .hero-content { width: min(100%, 520px); padding: 62px 0; }
+    .eyebrow { color: var(--pink-dark); text-transform: uppercase; letter-spacing: 3px; font-size: 13px; font-weight: 800; margin: 0 0 2px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; }
+    h1 { font-size: clamp(42px, 5.2vw, 68px); line-height: 1.04; letter-spacing: -1.8px; margin-bottom: 18px; }
+    .hero p:not(.eyebrow) { max-width: 445px; font-size: 17px; line-height: 1.55; margin-bottom: 22px; }
+    .hero-note { position: absolute; right: max(4%, calc((100% - var(--max))/2 + 25px)); top: 19%; max-width: 210px; color: white; font: italic 31px/1.18 Georgia, serif; text-align: center; transform: rotate(-7deg); text-shadow: 0 2px 10px #4a302b55; }
+    .hero-note span { display: block; font-size: 34px; margin-top: 3px; }
+    .services { padding: 24px 0 34px; text-align: center; }
+    .section-kicker { color: var(--pink); text-transform: uppercase; letter-spacing: 2.5px; font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+    h2 { font-size: clamp(27px, 3vw, 36px); line-height: 1.2; margin-bottom: 28px; }
+    .service-grid { display: grid; grid-template-columns: repeat(5, 1fr); }
+    .service-card { padding: 0 18px 4px; position: relative; }
+    .service-card + .service-card { border-left: 1px solid #ead6d8; }
+    .service-icon { width: 76px; height: 76px; display: grid; place-items: center; border-radius: 50%; background: var(--pink-light); margin: 0 auto 10px; color: #843f4f; }
+    .service-icon svg { width: 46px; height: 46px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { font-size: 16px; margin-bottom: 6px; }
+    .service-card p { font-size: 14px; line-height: 1.45; color: var(--muted); margin: 0 auto; max-width: 190px; }
+    .why { display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; padding: 0 20px 10px; max-width: 1320px; margin: 0 auto; }
+    .salon-photo { min-height: 270px; overflow: hidden; }
+    .salon-photo img { width: 100%; height: 100%; min-height: 270px; display: block; object-fit: cover; object-position: center; }
+    .why-content { position: relative; overflow: hidden; background: linear-gradient(120deg, #f7e8e8, #f9eeee); padding: 28px clamp(28px, 5.5vw, 76px); display: flex; flex-direction: column; justify-content: center; }
+    .why-content h2 { font-size: 29px; margin-bottom: 16px; }
+    .benefits { padding: 0; margin: 0 0 18px; list-style: none; }
+    .benefits li { display: flex; align-items: center; gap: 12px; margin: 7px 0; font-size: 14px; }
+    .check { width: 21px; height: 21px; display: inline-grid; place-items: center; flex-shrink: 0; color: white; background: var(--pink-dark); border-radius: 50%; font-size: 13px; font-weight: 800; }
+    .leaf-art { position: absolute; width: 150px; height: 220px; right: 5px; bottom: -20px; opacity: .75; pointer-events: none; }
+    .why-content .btn { align-self: flex-start; min-width: 180px; padding: 10px 22px; font-size: 13px; position: relative; z-index: 1; }
+    .footer { background: var(--dark); color: #fff5f4; margin-top: 0; }
+    .footer-main { display: grid; grid-template-columns: 1.15fr 1.7fr 1.2fr 1fr; align-items: center; gap: 30px; padding: 27px 0; }
+    .footer .brand-name { font-size: 30px; }
+    .footer .brand-sub { font-size: 8px; letter-spacing: 2px; }
+    .footer-col { min-height: 70px; border-left: 1px solid #77716f; padding-left: 30px; }
+    .footer h3 { font-size: 14px; margin-bottom: 5px; }
+    .footer p { font-size: 12px; margin: 3px 0; }
+    .contact-line { display: flex; gap: 10px; align-items: center; }
+    .contact-line span:first-child { color: #f4b8c8; width: 16px; }
+    .socials { display: flex; gap: 12px; margin-top: 9px; }
+    .socials a { width: 28px; height: 28px; border-radius: 50%; background: #f6c6d0; color: #3a252c; display: grid; place-items: center; font-size: 14px; font-weight: 800; transition: transform .2s; }
+    .socials a:hover { transform: translateY(-3px); }
+    .footer-slogan { font: italic 22px/1.1 Georgia, serif; text-align: center; transform: rotate(-6deg); }
+    .footer-slogan span { display: block; font-size: 24px; }
+    .copyright { background: #e7a9b8; color: #59404a; text-align: center; padding: 9px 12px; font-size: 11px; }
+    .modal-backdrop { position: fixed; inset: 0; background: #171b1acc; display: none; align-items: center; justify-content: center; padding: 18px; z-index: 100; }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: min(100%, 510px); max-height: 92vh; overflow: auto; background: #fffaf8; border-radius: 20px; padding: 28px; box-shadow: 0 20px 70px #0004; position: relative; }
+    .modal h2 { margin-bottom: 5px; }
+    .modal-intro { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+    .modal-close { position: absolute; top: 12px; right: 15px; border: 0; background: none; font-size: 27px; cursor: pointer; color: var(--muted); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 13px; font-weight: 700; }
+    .field input, .field select, .field textarea { width: 100%; border: 1px solid #e2cdd1; border-radius: 10px; background: white; padding: 11px 12px; outline: none; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px #d45b7d20; }
+    .form-success { display: none; margin-top: 12px; color: #31674a; background: #e7f4e9; border-radius: 10px; padding: 12px; font-size: 14px; }
+    .form-success.show { display: block; }
+    
+  </style>
+</head>
+<body>
+    <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="BellaVita, inicio">
+
+        <!-- CAMBIAR LOGO -->
+         <img src="img/img/WhatsApp Image 2026-10-20 at 2.17.52 PM.jpeg" alt="Logotipo BellaVita" class="brand-mark">
+        <!-- CAMBIAR LOGO -->
+
+        <span><span class="brand-name">Lusarie</span><span class="brand-sub" style="display:block">SALÓN DE BELLEZA</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a class="active" href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#nosotros">Nosotras</a><a href="#contacto">Contacto</a>
+      </nav>
+      <button class="btn btn-primary" data-open-booking><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M9 14h2v2H9z"/></svg> Reservar Cita</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <p class="eyebrow">Salón de belleza</p>
+          <h1>¡Bienvenidos!</h1>
+          <p>Te damos la bienvenida a nuestro espacio dedicado a resaltar tu belleza y cuidar de ti. Ofrecemos servicios de belleza con calidad, dedicación y estilo, para que te sientas hermosa, segura y especial.</p>
+          <a class="btn btn-primary" href="#servicios">Conoce nuestros servicios <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="hero-note" aria-label="Tu belleza es nuestra inspiración">Tu belleza<br>es nuestra<br>inspiración<span>♡</span></div>
+    </section>
+
+    <section class="services" id="servicios">
+      <div class="container">
+        <p class="section-kicker">Nuestros servicios</p>
+        <h2>Todo lo que necesitas para verte y sentirte increíble</h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <div class=""><img src="img/img/WhatsApp Image 2026-10-20 at 1.49.00 PM (4).jpeg" alt="Logotipo BellaVita" class="brand-mark">
+            <h3>Limpieza Facial</h3><p>Cuida y renueva tu piel con nuestros tratamientos faciales.</p>
+          </article>
+          <article class="service-card">
+            <div class=""><img src="img/img/carpeta/WhatsApp Image 2026-10-20 at 1.48.59 PM.jpeg" alt="Logotipo BellaVita" class="brand-mark">
+            <h3>Peinados y Cortes</h3><p>Estilos modernos y personalizados para cada ocasión.</p>
+          </article>
+          <article class="service-card">
+            <div class=""><img src="img/img/WhatsApp Image 2026-10-20 at 1.49.00 PM.jpeg" alt="Logotipo BellaVita" class="brand-mark">
+            <h3>Manicura y Pedicura</h3><p>Uñas lindas y cuidadas siempre.</p>
+          </article>
+          <article class="service-card">
+            <div class=""><img src="img/img/WhatsApp Image 2026-10-20 at 1.49.00 PM (1).jpeg" alt="Logotipo BellaVita" class="brand-mark">
+            <h3>Depilación</h3><p>Piel suave y libre de impurezas.</p>
+          </article>
+          <article class="service-card">
+            <div class=""><img src="img/img/WhatsApp Image 2026-10-20 at 1.49.00 PM (2).jpeg" alt="Logotipo BellaVita" class="brand-mark">
+            <h3>Maquillaje Profesional</h3><p>Resalta tu belleza en cada momento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="why" id="nosotros">
+        <!-- CAMBIAR fotos de presentacion  -->
+        <section class="galeria">
+
+            <div class="carrusel">
+                <div class="imagenes">
+                    <img src="img/img/WhatsApp Image 2026-10-20 at 2.34.28 PM.jpeg"  width="300">
+                    <img src="img/img/WhatsApp Image 2026-10-20 at 2.34.29 PM (1).jpeg"  width="300">
+                    <img src="img/img/WhatsApp Image 2026-10-20 at 2.34.29 PM (2).jpeg"  width="300">
+                    <img src="img/img/WhatsApp Image 2026-10-20 at 2.34.29 PM.jpeg"  width="300">
+                </div>
+             </div>
+        </section>
+
+        <!-- CAMBIAR fotos de presentacion -->
+
+      <div class="why-content">
+        <h2>¿Por qué elegirnos?</h2>
+        <ul class="benefits">
+          <li><span class="check">✓</span> Profesionales con experiencia</li>
+          <li><span class="check">✓</span> Productos de alta calidad</li>
+          <li><span class="check">✓</span> Ambiente cómodo y relajante</li>
+          <li><span class="check">✓</span> Atención personalizada</li>
+        </ul>
+        <button class="btn btn-outline" data-open-booking>Contáctanos <span aria-hidden="true">→</span></button>
+        <svg class="leaf-art" viewBox="0 0 150 220" fill="none" stroke="#d45b7d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M126 218 C111 178 96 128 88 82 C83 54 82 31 85 12"/>
+          <path d="M116 181 C94 177 77 164 66 145 C88 146 106 159 116 181Z"/>
+          <path d="M105 151 C125 137 135 119 134 98 C116 109 106 128 105 151Z"/>
+          <path d="M98 122 C76 115 60 100 53 80 C75 84 91 99 98 122Z"/>
+          <path d="M91 91 C108 76 116 57 111 37 C96 50 89 69 91 91Z"/>
+          <path d="M86 62 C69 49 62 32 66 14 C81 29 88 45 86 62Z"/>
+        </svg>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contactos">
+    <div class="container footer-main">
+        <a class="brand" href="#inicio" aria-label="Volver al inicio">
+
+            <!-- CAMBIAR LOGO -->
+             <img src="img/img/WhatsApp Image 2026-10-20 at 2.17.49 PM.jpeg" alt="Logotipo BellaVita" class="brand-mark">
+            <!-- CAMBIAR LOGO -->
+
+            <span><span class="brand-name">Lusarie</span><span class="brand-sub" style="display:block">SALÓN DE BELLEZA</span></span>
+            </a>
+        <div class="footer-col">
+            <h3>Contacto</h3>
+            <p class="contact-line"><span>☎</span><a href="tel:+59171234567">+591 68843029</a></p>
+            <p class="contact-line"><span>♦</span><span>Av. Oscar Paz, Barrio El Triunfo</span></p>
+            <p class="contact-line"><span>✉</span><a href="mailto:info@bellavita.com">info@Lusarie.com</a></p>
+        </div>
+        <div class="footer-col">
+            <h3>Síguenos</h3>
+            <div class="socials">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
+                <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok">♪</a>
+            </div>
+        </div>
+            <div class="footer-col footer-slogan">Tu belleza,<br>nuestra pasión<span>♡</span></div>
+        </div>
+    <div class="copyright">© 2025 Lusarie. SALON DE BELLEZA.</div>
+
+  </footer>
+
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <div class="modal">
+      <button class="modal-close" id="closeModal" aria-label="Cerrar ventana">×</button>
+      <p class="section-kicker">Tu momento especial</p>
+      <h2 id="bookingTitle">Reserva tu cita</h2>
+      <p class="modal-intro">Déjanos tus datos y prepararemos tu visita a BellaVita.</p>
+      <form id="bookingForm">
+        <div class="form-grid">
+          <div class="field"><label for="name">Nombre completo *</label><input id="name" name="name" autocomplete="name" required placeholder="Tu nombre"></div>
+          <div class="field"><label for="phone">Teléfono / WhatsApp *</label><input id="phone" name="phone" autocomplete="tel" required placeholder="+591 ..."></div>
+          <div class="field"><label for="service">Servicio *</label><select id="service" name="service" required><option value="">Selecciona un servicio</option><option>Limpieza Facial</option><option>Peinados y Cortes</option><option>Manicura y Pedicura</option><option>Depilación</option><option>Maquillaje Profesional</option><option>Otro / Asesoría</option></select></div>
+          <div class="field"><label for="date">Fecha preferida *</label><input id="date" name="date" type="date" required></div>
+          <div class="field"><label for="time">Hora preferida *</label><select id="time" name="time" required><option value="">Elige una hora</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select></div>
+          <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com"></div>
+          <div class="field full"><label for="notes">Comentarios (opcional)</label><textarea id="notes" name="notes" rows="3" placeholder="Cuéntanos si tienes alguna preferencia..."></textarea></div>
+        </div>
+        <button class="btn btn-primary" type="submit" style="width:100%">Solicitar cita <span>→</span></button>
+        <div class="form-success" id="formSuccess" role="status">¡Gracias! Tu solicitud quedó preparada en esta demostración. Para confirmar la cita, conecta este formulario a WhatsApp, correo o un sistema de reservas.</div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+      navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    }));
+
+    const modal = document.getElementById('bookingModal');
+    const closeModal = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+    document.querySelectorAll('[data-open-booking]').forEach(btn => btn.addEventListener('click', () => {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('formSuccess').classList.remove('show');
+      setTimeout(() => document.getElementById('name').focus(), 100);
+    }));
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+    const dateInput = document.getElementById('date');
+    const today = new Date();
+    dateInput.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    document.getElementById('bookingForm').addEventListener('submit', e => {
+      e.preventDefault();
+      if (!e.currentTarget.reportValidity()) return;
+      document.getElementById('formSuccess').classList.add('show');
+      e.currentTarget.querySelector('button[type="submit"]').textContent = 'Solicitud preparada ✓';
+    });
+  </script>
+</body>
+</html>
